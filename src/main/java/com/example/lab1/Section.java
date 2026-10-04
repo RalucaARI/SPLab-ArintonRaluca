@@ -3,7 +3,8 @@ package com.example.lab1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Section implements Element {
+public class Section extends Element {
+
     protected String title;
     protected List<Element> children = new ArrayList<>();
 
@@ -14,10 +15,7 @@ public class Section implements Element {
     @Override
     public void print() {
         System.out.println(title);
-
-        for (Element element : children) {
-            element.print();
-        }
+        printChildren();
     }
 
     protected void printChildren() {
@@ -28,12 +26,19 @@ public class Section implements Element {
 
     @Override
     public void add(Element element) {
+        if (element.getParent() != null) {
+            throw new IllegalStateException("Element already has a parent");
+        }
+
         children.add(element);
+        element.setParent(this);
     }
 
     @Override
     public void remove(Element element) {
-        children.remove(element);
+        if (children.remove(element)) {
+            element.setParent(null);
+        }
     }
 
     @Override

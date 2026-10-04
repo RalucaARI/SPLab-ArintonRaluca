@@ -1,6 +1,6 @@
 package com.example.lab1;
 
-public class Table implements Element {
+public class Table extends Element {
     private String something;
 
     public Table(String something) {
@@ -10,18 +10,5 @@ public class Table implements Element {
     @Override
     public void print() {
         System.out.println("Table: " + something);
-    }
-
-    @Override
-    public void add(Element element) {
-    }
-
-    @Override
-    public void remove(Element element) {
-    }
-
-    @Override
-    public Element get(int index) {
-        return null;
     }
 }
