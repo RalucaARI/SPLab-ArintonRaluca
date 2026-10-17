@@ -1,3 +1,4 @@
+
 package com.example.lab1;
 
 import java.util.concurrent.TimeUnit;
@@ -18,5 +19,15 @@ public class Image extends Element {
     @Override
     public void print() {
         System.out.println("Image with name:" + url);
+    }
+
+    @Override
+    public void render() {
+        System.out.println("Image with name:" + url);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

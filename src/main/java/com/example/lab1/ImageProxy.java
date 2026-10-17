@@ -1,3 +1,4 @@
+
 package com.example.lab1;
 
 public class ImageProxy extends Element {
@@ -16,5 +17,19 @@ public class ImageProxy extends Element {
         }
 
         realImage.print();
+    }
+
+    @Override
+    public void render() {
+        if (realImage == null) {
+            realImage = new Image(url);
+        }
+
+        realImage.render();
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

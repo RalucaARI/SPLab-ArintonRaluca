@@ -1,3 +1,4 @@
+
 package com.example.lab1;
 
 import java.util.ArrayList;
@@ -31,5 +32,24 @@ public class Book extends Section {
         }
 
         printChildren();
+    }
+
+    @Override
+    public void render() {
+        System.out.println("Book: " + title);
+        System.out.println("Authors:");
+
+        for (Author author : authors) {
+            author.print();
+        }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+
+        for (Element element : children) {
+            element.accept(visitor);
+        }
     }
 }

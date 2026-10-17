@@ -1,3 +1,4 @@
+
 package com.example.lab1;
 
 public abstract class Element {
@@ -13,6 +14,10 @@ public abstract class Element {
     }
 
     public abstract void print();
+
+    public abstract void render();
+
+    public abstract void accept(Visitor visitor);
 
     public void add(Element element) {
         throw new UnsupportedOperationException();

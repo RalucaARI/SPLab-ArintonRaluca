@@ -1,3 +1,4 @@
+
 package com.example.lab1;
 
 public class Paragraph extends Element {
@@ -10,5 +11,15 @@ public class Paragraph extends Element {
     @Override
     public void print() {
         System.out.println("Paragraph: " + text);
+    }
+
+    @Override
+    public void render() {
+        System.out.println("Paragraph: " + text);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

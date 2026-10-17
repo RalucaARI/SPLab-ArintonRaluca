@@ -1,3 +1,4 @@
+
 package com.example.lab1;
 
 public class Table extends Element {
@@ -10,5 +11,15 @@ public class Table extends Element {
     @Override
     public void print() {
         System.out.println("Table: " + something);
+    }
+
+    @Override
+    public void render() {
+        System.out.println("Table: " + something);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }
