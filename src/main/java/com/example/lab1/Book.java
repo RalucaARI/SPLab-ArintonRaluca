@@ -1,17 +1,32 @@
 
 package com.example.lab1;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Book extends Section {
 
-    private String title;
+    @ManyToMany
     private List<Author> authors = new ArrayList<>();
+
+    public Book() {
+        super();
+    }
 
     public Book(String title) {
         super(title);
-        this.title = title;
+    }
+
+    public String getBookTitle() {
+        return title;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
     }
 
     public void addAuthor(Author author) {

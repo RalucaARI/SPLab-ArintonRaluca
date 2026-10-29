@@ -1,10 +1,16 @@
 
 package com.example.lab1;
 
+import jakarta.persistence.Entity;
 import java.util.concurrent.TimeUnit;
 
+@Entity
 public class Image extends Element {
+
     private String url;
+
+    public Image() {
+    }
 
     public Image(String url) {
         this.url = url;
@@ -12,8 +18,12 @@ public class Image extends Element {
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     @Override

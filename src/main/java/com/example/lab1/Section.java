@@ -1,16 +1,34 @@
-
 package com.example.lab1;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Section extends Element {
 
     protected String title;
+
+    @OneToMany(cascade = CascadeType.ALL)
     protected List<Element> children = new ArrayList<>();
+
+    public Section() {
+    }
 
     public Section(String title) {
         this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Element> getChildren() {
+        return children;
     }
 
     @Override

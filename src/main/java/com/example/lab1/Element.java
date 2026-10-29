@@ -1,9 +1,26 @@
-
 package com.example.lab1;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Element {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne
+    @JsonIgnore
     private Element parent;
+
+    public Element() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
 
     public Element getParent() {
         return parent;
