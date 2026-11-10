@@ -1,7 +1,7 @@
-
 package com.example.lab1.controllers;
 
 import com.example.lab1.Book;
+import com.example.lab1.AllBooksSubject;
 import com.example.lab1.persistence.CrudRepository;
 import com.example.lab1.persistence.BookRepositoryAdapter;
 import org.springframework.http.ResponseEntity;
@@ -14,18 +14,18 @@ import java.util.List;
 public class BooksController {
 
     private final CrudRepository<Book, Integer> bookRepository;
+    private final AllBooksSubject allBooksSubject;
 
-    public BooksController(BookRepositoryAdapter adapter) {
+    public BooksController(BookRepositoryAdapter adapter, AllBooksSubject allBooksSubject) {
         this.bookRepository = adapter;
+        this.allBooksSubject = allBooksSubject;
     }
 
-    // Afiseaza toate cartile
     @GetMapping
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
-    // Afiseaza o carte dupa ID
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Integer id) {
         return bookRepository.findById(id)
@@ -33,13 +33,13 @@ public class BooksController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Creeaza o carte noua
     @PostMapping
     public Book createBook(@RequestBody Book book) {
-        return bookRepository.save(book);
+        Book savedBook = bookRepository.save(book);
+        allBooksSubject.add(savedBook);
+        return savedBook;
     }
 
-    // Modifica titlul unei carti
     @PutMapping("/{id}")
     public ResponseEntity<Book> updateBook(
             @PathVariable Integer id,
@@ -54,7 +54,6 @@ public class BooksController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Sterge o carte dupa ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable Integer id) {
 
